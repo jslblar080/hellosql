@@ -1,20 +1,16 @@
 package com.github.jslblar080.sql.join;
 
-import com.github.jslblar080.domain.Rank;
-import com.github.jslblar080.domain.Suit;
-import com.github.jslblar080.repository.BaseRepository;
-import com.github.jslblar080.sql.QueryService;
+import com.github.jslblar080.BaseRepository;
+import com.github.jslblar080.QueryService;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.Tuple;
 
 import java.util.List;
 
-public class CrossJoinService implements QueryService {
-
-    private final BaseRepository repository;
+public class CrossJoinService extends QueryService {
 
     public CrossJoinService(BaseRepository repository) {
-        this.repository = repository;
+        super(repository);
     }
 
     @PostConstruct

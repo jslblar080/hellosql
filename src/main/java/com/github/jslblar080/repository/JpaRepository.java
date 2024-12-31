@@ -1,6 +1,7 @@
 package com.github.jslblar080.repository;
 
-import com.github.jslblar080.domain.BaseEntity;
+import com.github.jslblar080.BaseEntity;
+import com.github.jslblar080.BaseRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 

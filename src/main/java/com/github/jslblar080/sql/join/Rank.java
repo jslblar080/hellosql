@@ -1,13 +1,14 @@
-package com.github.jslblar080.domain;
+package com.github.jslblar080.sql.join;
 
+import com.github.jslblar080.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "suits")
+@Table(name = "ranks")
 @RequiredArgsConstructor
 @Getter
-public class Suit extends BaseEntity {
+public class Rank extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -18,6 +19,7 @@ public class Suit extends BaseEntity {
     private String name;
 
     @NonNull
+    @Column(name = "rank_value")
     @Setter
-    private String symbol;
+    private Integer rankValue;
 }

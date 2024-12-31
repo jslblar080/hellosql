@@ -1,8 +1,8 @@
 package com.github.jslblar080.config;
 
-import com.github.jslblar080.repository.BaseRepository;
+import com.github.jslblar080.BaseRepository;
 import com.github.jslblar080.repository.JpaRepository;
-import com.github.jslblar080.sql.QueryService;
+import com.github.jslblar080.QueryService;
 import com.github.jslblar080.sql.join.CrossJoinService;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,4 @@
-package com.github.jslblar080.repository;
-
-import com.github.jslblar080.domain.BaseEntity;
+package com.github.jslblar080;
 
 import java.util.List;
 
