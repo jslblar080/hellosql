@@ -43,4 +43,20 @@ public class CrossJoinService extends QueryService {
 
         return repository.getResultList(sqlCrossJoin, Tuple.class);
     }
+
+    public List<Tuple> extractCardsWithoutJoin() {
+
+        String sqlThetaStyle = """
+                SELECT
+                    ranks.name as rank,
+                    suits.symbol as suit
+                FROM
+                    ranks, suits
+                ORDER BY
+                    ranks.rank_value DESC,
+                    suits.name ASC
+                """;
+
+        return repository.getResultList(sqlThetaStyle, Tuple.class);
+    }
 }

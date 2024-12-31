@@ -40,4 +40,13 @@ class CrossJoinServiceTest {
             assertThat(arrayNameSymbol[1][j]).isEqualTo(card.get("suit"));
         }
     }
+
+    @Test
+    void compareCards() {
+
+        List<Tuple> cardsWithJoin = crossJoinService.extractCards();
+        List<Tuple> cardsWithoutJoin = crossJoinService.extractCardsWithoutJoin();
+
+        assertThat(cardsWithJoin.toString()).isEqualTo(cardsWithoutJoin.toString());
+    }
 }
