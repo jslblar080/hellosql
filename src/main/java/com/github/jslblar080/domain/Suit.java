@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "suits")
 @RequiredArgsConstructor
 @Getter
-public class Suit {
+public class Suit extends BaseEntity {
 
     @Id
     @GeneratedValue

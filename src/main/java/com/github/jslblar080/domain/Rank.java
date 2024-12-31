@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "ranks")
 @RequiredArgsConstructor
 @Getter
-public class Rank {
+public class Rank extends BaseEntity {
 
     @Id
     @GeneratedValue

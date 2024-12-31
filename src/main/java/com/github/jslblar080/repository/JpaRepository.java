@@ -1,5 +1,6 @@
 package com.github.jslblar080.repository;
 
+import com.github.jslblar080.domain.BaseEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -16,7 +17,7 @@ public class JpaRepository implements BaseRepository {
     }
 
     @Override
-    public void save(Object entity) {
+    public void save(BaseEntity entity) {
 
         em = emf.createEntityManager();
         em.getTransaction().begin();
