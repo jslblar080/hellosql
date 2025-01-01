@@ -30,15 +30,15 @@ public class CrossJoinService extends QueryService {
 
         String sqlCrossJoin = """
                 SELECT
-                    ranks.name AS rank,
-                    suits.symbol AS suit
+                    r.name rank,
+                    s.symbol suit
                 FROM
-                    ranks
+                    ranks r
                 CROSS JOIN
-                    suits
+                    suits s
                 ORDER BY
-                    ranks.rank_value DESC,
-                    suits.name ASC
+                    r.rank_value DESC,
+                    s.name ASC
                 """;
 
         return repository.getResultList(sqlCrossJoin, Tuple.class);
@@ -48,13 +48,13 @@ public class CrossJoinService extends QueryService {
 
         String sqlThetaStyle = """
                 SELECT
-                    ranks.name AS rank,
-                    suits.symbol AS suit
+                    r.name rank,
+                    s.symbol suit
                 FROM
-                    ranks, suits
+                    ranks r, suits s
                 ORDER BY
-                    ranks.rank_value DESC,
-                    suits.name ASC
+                    r.rank_value DESC,
+                    s.name ASC
                 """;
 
         return repository.getResultList(sqlThetaStyle, Tuple.class);
