@@ -17,14 +17,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CrossJoinServiceTest {
 
     @Autowired
-    private CrossJoinService crossJoinService;
+    private CrossJoinService service;
 
     @Test
     void extractCards() {
 
         String[][] arrayNameSymbol = {{"King", "Queen", "Jack"}, {"♣", "♦", "♥", "♠"}};
 
-        List<Tuple> cards = crossJoinService.extractCards();
+        List<Tuple> cards = service.extractCards();
         System.out.println(cards);
 
         for (int i = 0, j = 0, k = 0; k < cards.size(); j++) {
@@ -44,8 +44,8 @@ class CrossJoinServiceTest {
     @Test
     void compareCards() {
 
-        List<Tuple> cardsWithJoin = crossJoinService.extractCards();
-        List<Tuple> cardsWithoutJoin = crossJoinService.extractCardsWithoutJoin();
+        List<Tuple> cardsWithJoin = service.extractCards();
+        List<Tuple> cardsWithoutJoin = service.extractCardsWithoutJoin();
 
         assertThat(cardsWithJoin.toString()).isEqualTo(cardsWithoutJoin.toString());
     }

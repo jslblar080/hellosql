@@ -28,7 +28,7 @@ public class CrossJoinService extends QueryService {
 
     public List<Tuple> extractCards() {
 
-        String sqlCrossJoin = """
+        String sql = """
                 SELECT
                     r.name rank,
                     s.symbol suit
@@ -41,7 +41,7 @@ public class CrossJoinService extends QueryService {
                     s.name ASC
                 """;
 
-        return repository.getResultList(sqlCrossJoin, Tuple.class);
+        return repository.getResultList(sql, Tuple.class);
     }
 
     public List<Tuple> extractCardsWithoutJoin() {

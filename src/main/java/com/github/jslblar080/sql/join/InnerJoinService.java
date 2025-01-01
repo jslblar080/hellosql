@@ -31,7 +31,7 @@ public class InnerJoinService extends QueryService {
 
     public List<Tuple> extractPosts() {
 
-        String sqlInnerJoin = """
+        String sql = """
                 SELECT
                     p.id id,
                     p.title title,
@@ -44,6 +44,25 @@ public class InnerJoinService extends QueryService {
                     pc.id
                 """;
 
-        return repository.getResultList(sqlInnerJoin, Tuple.class);
+        return repository.getResultList(sql, Tuple.class);
+    }
+
+    public List<Tuple> extractPostsWithoutJoin() {
+
+        String sqlThetaStyle = """
+                SELECT
+                    p.id id,
+                    p.title title,
+                    pc.review review
+                FROM
+                    post p,
+                    post_comment pc
+                WHERE
+                    pc.post_id = p.id
+                ORDER BY
+                    pc.id
+                """;
+
+        return repository.getResultList(sqlThetaStyle, Tuple.class);
     }
 }

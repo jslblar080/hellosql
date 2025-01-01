@@ -17,12 +17,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 class InnerJoinServiceTest {
 
     @Autowired
-    private InnerJoinService innerJoinService;
+    private InnerJoinService service;
 
     @Test
     void extractPosts() {
 
-        List<Tuple> posts = innerJoinService.extractPosts();
+        List<Tuple> posts = service.extractPosts();
         System.out.println(posts);
 
         Tuple post1 = posts.get(0);
@@ -40,5 +40,14 @@ class InnerJoinServiceTest {
         assertThat("Good").isEqualTo(post1.get("review"));
         assertThat("Excellent").isEqualTo(post2.get("review"));
         assertThat("Awesome").isEqualTo(post3.get("review"));
+    }
+
+    @Test
+    void comparePosts() {
+
+        List<Tuple> postsWithJoin = service.extractPosts();
+        List<Tuple> postsWithoutJoin = service.extractPostsWithoutJoin();
+
+        assertThat(postsWithJoin.toString()).isEqualTo(postsWithoutJoin.toString());
     }
 }
