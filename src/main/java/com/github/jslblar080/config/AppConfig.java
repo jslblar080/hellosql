@@ -4,6 +4,7 @@ import com.github.jslblar080.BaseRepository;
 import com.github.jslblar080.repository.JpaRepository;
 import com.github.jslblar080.QueryService;
 import com.github.jslblar080.sql.join.CrossJoinService;
+import com.github.jslblar080.sql.join.InnerJoinService;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,12 @@ public class AppConfig {
     public QueryService crossJoinService() {
 
         return new CrossJoinService(jpaRepository());
+    }
+
+    @Bean
+    public QueryService innerJoinService() {
+
+        return new InnerJoinService(jpaRepository());
     }
 
     private BaseRepository jpaRepository() {
