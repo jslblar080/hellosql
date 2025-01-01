@@ -30,8 +30,8 @@ public class CrossJoinService extends QueryService {
 
         String sqlCrossJoin = """
                 SELECT
-                    ranks.name as rank,
-                    suits.symbol as suit
+                    ranks.name AS rank,
+                    suits.symbol AS suit
                 FROM
                     ranks
                 CROSS JOIN
@@ -48,8 +48,8 @@ public class CrossJoinService extends QueryService {
 
         String sqlThetaStyle = """
                 SELECT
-                    ranks.name as rank,
-                    suits.symbol as suit
+                    ranks.name AS rank,
+                    suits.symbol AS suit
                 FROM
                     ranks, suits
                 ORDER BY
