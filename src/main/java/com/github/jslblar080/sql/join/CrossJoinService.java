@@ -51,7 +51,8 @@ public class CrossJoinService extends QueryService {
                     r.name rank,
                     s.symbol suit
                 FROM
-                    ranks r, suits s
+                    ranks r,
+                    suits s
                 ORDER BY
                     r.rank_value DESC,
                     s.name ASC
