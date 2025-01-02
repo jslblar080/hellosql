@@ -1,10 +1,7 @@
 package com.github.jslblar080.sql.join;
 
 import com.github.jslblar080.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,4 +20,15 @@ public class Post extends BaseEntity {
     @NonNull
     @Setter
     private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "local_id")
+    private Localization localization;
+
+    public static Post createPost(String title, Localization localization) {
+
+        Post post = new Post(title);
+        post.localization = localization;
+        return post;
+    }
 }
