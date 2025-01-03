@@ -3,10 +3,7 @@ package com.github.jslblar080.config;
 import com.github.jslblar080.BaseRepository;
 import com.github.jslblar080.repository.JpaRepository;
 import com.github.jslblar080.QueryService;
-import com.github.jslblar080.sql.join.CrossJoinService;
-import com.github.jslblar080.sql.join.InnerJoinService;
-import com.github.jslblar080.sql.join.InnerJoinUsingService;
-import com.github.jslblar080.sql.join.NaturalJoinService;
+import com.github.jslblar080.sql.join.*;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,6 +39,12 @@ public class AppConfig {
     public QueryService naturalJoinService() {
 
         return new NaturalJoinService(jpaRepository());
+    }
+
+    @Bean
+    public QueryService outerJoinService() {
+
+        return new OuterJoinService(jpaRepository());
     }
 
     private BaseRepository jpaRepository() {
