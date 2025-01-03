@@ -30,12 +30,12 @@ class InnerJoinServiceTest {
         Tuple post3 = posts.get(2);
 
         assertThat(1L).isEqualTo(post1.get("id"));
-        assertThat(2L).isEqualTo(post2.get("id"));
-        assertThat(3L).isEqualTo(post3.get("id"));
+        assertThat(1L).isEqualTo(post2.get("id"));
+        assertThat(2L).isEqualTo(post3.get("id"));
 
         assertThat("Java").isEqualTo(post1.get("title"));
-        assertThat("Hibernate").isEqualTo(post2.get("title"));
-        assertThat("JPA").isEqualTo(post3.get("title"));
+        assertThat("Java").isEqualTo(post2.get("title"));
+        assertThat("Hibernate").isEqualTo(post3.get("title"));
 
         assertThat("Good").isEqualTo(post1.get("review"));
         assertThat("Excellent").isEqualTo(post2.get("review"));

@@ -25,8 +25,8 @@ public class InnerJoinService extends QueryService {
         repository.save(post3);
 
         repository.save(new PostComment(post1, "Good"));
-        repository.save(new PostComment(post2, "Excellent"));
-        repository.save(new PostComment(post3, "Awesome"));
+        repository.save(new PostComment(post1, "Excellent"));
+        repository.save(new PostComment(post2, "Awesome"));
     }
 
     public List<Tuple> extractPosts() {
