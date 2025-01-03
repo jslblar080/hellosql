@@ -4,6 +4,7 @@ import com.github.jslblar080.BaseEntity;
 import com.github.jslblar080.BaseRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public class JpaRepository implements BaseRepository {
 
     private EntityManager em;
 
+    private EntityTransaction txn;
+
     public JpaRepository(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -21,11 +24,20 @@ public class JpaRepository implements BaseRepository {
     public void save(BaseEntity entity) {
 
         em = emf.createEntityManager();
-        em.getTransaction().begin();
+        txn = em.getTransaction();
 
-        em.persist(entity);
+        txn.begin();
+        try {
+            em.persist(entity);
+            em.flush();
 
-        em.getTransaction().commit();
+            txn.commit();
+        } catch (RuntimeException e) {
+            if (txn.isActive()) txn.rollback();
+            throw e;
+        } finally {
+            if (em.isOpen()) em.close();
+        }
         em.close();
     }
 
@@ -33,11 +45,22 @@ public class JpaRepository implements BaseRepository {
     public <T> List<T> getResultList(String sql, Class<T> tClass) {
 
         em = emf.createEntityManager();
-        em.getTransaction().begin();
+        txn = em.getTransaction();
 
-        List<T> resultList = em.createNativeQuery(sql, tClass).getResultList();
+        List<T> resultList;
 
-        em.getTransaction().commit();
+        txn.begin();
+        try {
+            resultList = em.createNativeQuery(sql, tClass).getResultList();
+            em.flush();
+
+            txn.commit();
+        } catch (RuntimeException e) {
+            if (txn.isActive()) txn.rollback();
+            throw e;
+        } finally {
+            if (em.isOpen()) em.close();
+        }
         em.close();
 
         return resultList;
