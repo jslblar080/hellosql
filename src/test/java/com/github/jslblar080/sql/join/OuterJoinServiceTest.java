@@ -20,7 +20,7 @@ class OuterJoinServiceTest {
     private OuterJoinService service;
 
     @Test
-    void extractPosts() {
+    void extractPostsLeftRightJoin() {
 
         List<Tuple> posts = service.extractPostsLeftJoin();
         System.out.println(posts);
@@ -46,5 +46,32 @@ class OuterJoinServiceTest {
         assertThat("Excellent").isEqualTo(post2.get("review"));
         assertThat("Awesome").isEqualTo(post3.get("review"));
         assertThat(post4.get("review")).isNull();
+    }
+
+    @Test
+    void extractPostsFullJoin() {
+
+        List<Tuple> posts = service.extractPostsFullJoinEquivalent();
+        System.out.println(posts);
+
+        Tuple post1 = posts.get(0);
+        Tuple post2 = posts.get(1);
+        Tuple post3 = posts.get(2);
+        Tuple post4 = posts.get(3);
+
+        assertThat(post1.get("id")).isNull();
+        assertThat(7L).isEqualTo(post2.get("id"));
+        assertThat(8L).isEqualTo(post3.get("id"));
+        assertThat(9L).isEqualTo(post4.get("id"));
+
+        assertThat(post1.get("title")).isNull();
+        assertThat("8 Java Stream Tips").isEqualTo(post2.get("title"));
+        assertThat("10 Hibernate Tips").isEqualTo(post3.get("title"));
+        assertThat("3 years of blogging").isEqualTo(post4.get("title"));
+
+        assertThat("JPA").isEqualTo(post1.get("name"));
+        assertThat("Java").isEqualTo(post2.get("name"));
+        assertThat("Hibernate").isEqualTo(post3.get("name"));
+        assertThat(post4.get("name")).isNull();
     }
 }

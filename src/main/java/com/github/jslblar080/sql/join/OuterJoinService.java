@@ -16,11 +16,17 @@ public class OuterJoinService extends QueryService {
     @PostConstruct
     private void initDB() {
 
-        List<Tuple> posts = repository.getResultList("SELECT * FROM post", Tuple.class);
-        List<Tuple> postComments = repository.getResultList("SELECT * FROM post_comment", Tuple.class);
+        Category categoryJava = new Category("Java");
+        Category categoryHibernate = new Category("Hibernate");
+        Category categoryJPA = new Category("JPA");
 
-        System.out.println(">>> posts for OuterJoinService: " + posts);
-        System.out.println(">>> postComments for OuterJoinService: " + postComments);
+        repository.save(categoryJava);
+        repository.save(categoryHibernate);
+        repository.save(categoryJPA);
+
+        repository.save(Post.createPost("8 Java Stream Tips", categoryJava));
+        repository.save(Post.createPost("10 Hibernate Tips", categoryHibernate));
+        repository.save(new Post("3 years of blogging"));
     }
 
     public List<Tuple> extractPostsLeftJoin() {
@@ -34,6 +40,8 @@ public class OuterJoinService extends QueryService {
                     post p
                 LEFT JOIN
                     post_comment pc ON pc.post_id = p.id
+                WHERE
+                    p.id >= 1 AND p.id <= 3
                 ORDER BY
                     p.id
                 """;
@@ -52,8 +60,46 @@ public class OuterJoinService extends QueryService {
                     post_comment pc
                 RIGHT JOIN
                     post p ON pc.post_id = p.id
+                WHERE
+                    p.id >= 1 AND p.id <= 3
                 ORDER BY
                     p.id
+                """;
+
+        return repository.getResultList(sql, Tuple.class);
+    }
+
+    public List<Tuple> extractPostsFullJoinEquivalent() {
+
+        String sql = """
+                SELECT
+                    id,
+                    title,
+                    name
+                FROM
+                    (
+                    SELECT
+                        p.id id,
+                        p.title title,
+                        c.name name
+                    FROM
+                        post p
+                    LEFT JOIN
+                        category c ON c.id = p.category_id
+                    UNION
+                    SELECT
+                        p.id id,
+                        p.title title,
+                        c.name name
+                    FROM
+                        post p
+                    RIGHT JOIN
+                        category c ON c.id = p.category_id
+                    )
+                WHERE
+                    (id >= 7 AND id <= 9) OR id IS NULL
+                ORDER BY
+                    id
                 """;
 
         return repository.getResultList(sql, Tuple.class);

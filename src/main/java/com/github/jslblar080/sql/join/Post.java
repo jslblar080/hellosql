@@ -25,10 +25,20 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "local_id")
     private Localization localization;
 
+    @ManyToOne
+    private Category category;
+
     public static Post createPost(String title, Localization localization) {
 
         Post post = new Post(title);
         post.localization = localization;
+        return post;
+    }
+
+    public static Post createPost(String title, Category category) {
+
+        Post post = new Post(title);
+        post.category = category;
         return post;
     }
 }
