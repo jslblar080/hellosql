@@ -20,7 +20,7 @@ class InnerJoinUsingServiceTest {
     private InnerJoinUsingService service;
 
     @Test
-    void extractMetas() {
+    void extractBlogs() {
 
         List<Tuple> blogs = service.extractBlogs();
         System.out.println(blogs);
