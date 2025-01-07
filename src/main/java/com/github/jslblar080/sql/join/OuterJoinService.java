@@ -41,7 +41,7 @@ public class OuterJoinService extends QueryService {
                 LEFT JOIN
                     post_comment pc ON pc.post_id = p.id
                 WHERE
-                    p.id >= 1 AND p.id <= 3
+                    p.id BETWEEN 1 AND 3
                 ORDER BY
                     p.id
                 """;
@@ -61,7 +61,7 @@ public class OuterJoinService extends QueryService {
                 RIGHT JOIN
                     post p ON pc.post_id = p.id
                 WHERE
-                    p.id >= 1 AND p.id <= 3
+                    p.id BETWEEN 1 AND 3
                 ORDER BY
                     p.id
                 """;
@@ -97,7 +97,7 @@ public class OuterJoinService extends QueryService {
                         category c ON c.id = p.category_id
                     )
                 WHERE
-                    (id >= 7 AND id <= 9) OR id IS NULL
+                    (id BETWEEN 7 AND 9) OR (id IS NULL)
                 ORDER BY
                     id
                 """;
